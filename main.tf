@@ -15,7 +15,7 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "ozone-eks-${random_string.suffix.result}"
+  cluster_name = "arjunterraform-${random_string.suffix.result}"
 }
 
 resource "random_string" "suffix" {
@@ -27,7 +27,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
 
-  name = "ozone-dev-vpc"
+  name = "arjunterraform-vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -68,7 +68,7 @@ module "eks" {
 
   eks_managed_node_groups = {
     one = {
-      name = "ozone-node-group-1"
+      name = "arjunterraform-group-1"
 
       instance_types = ["t3.small"]
 
@@ -78,7 +78,7 @@ module "eks" {
     }
 
     two = {
-      name = "ozone-node-group-2"
+      name = "arjunterraform-group-2"
 
       instance_types = ["t3.small"]
 
